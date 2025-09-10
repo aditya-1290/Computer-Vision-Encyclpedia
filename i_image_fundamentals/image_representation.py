@@ -36,6 +36,7 @@ def load_and_display_image(image_path):
     # Display original image
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.title("Original Image (RGB)")
+    plt.savefig("original_image.png")
     plt.show()
 
     return image
@@ -60,13 +61,14 @@ def convert_color_spaces(image):
     axes[1].set_title("HSV")
     axes[2].imshow(lab)
     axes[2].set_title("LAB")
+    plt.savefig("color_spaces.png")
     plt.show()
 
     return hsv, lab
 
 if __name__ == "__main__":
     # Example usage (replace with actual image path)
-    image_path = "path/to/your/image.jpg"  # Update this path
+    image_path = "..\images\ganpati_bappa.jpg"  # Update this path
     image = load_and_display_image(image_path)
     if image is not None:
         convert_color_spaces(image)

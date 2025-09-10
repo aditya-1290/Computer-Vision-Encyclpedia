@@ -36,6 +36,7 @@ def display_image(image, title="Image"):
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.title(title)
     plt.axis('off')
+    plt.savefig(f"{title.replace(' ', '_').lower()}.png")
     plt.show()
 
 def resize_image(image, width, height):
@@ -63,7 +64,7 @@ def save_image(image, output_path):
 
 if __name__ == "__main__":
     # Example usage
-    image_path = "path/to/your/image.jpg"  # Update this
+    image_path = "..\images\ganpati_bappa.jpg"  # Update this
     image = load_image(image_path)
     if image is not None:
         display_image(image, "Original")

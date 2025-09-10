@@ -33,6 +33,7 @@ def plot_histogram(hist, title="Histogram"):
     plt.xlabel("Pixel Intensity")
     plt.ylabel("Frequency")
     plt.xlim([0, 256])
+    plt.savefig(f"{title.replace(' ', '_').lower()}.png")
     plt.show()
 
 def histogram_equalization(image):
@@ -51,7 +52,7 @@ def histogram_equalization(image):
 
 if __name__ == "__main__":
     # Example usage
-    image_path = "path/to/your/image.jpg"  # Update this
+    image_path = "..\images\ganpati_bappa.jpg"  # Update this
     image = cv2.imread(image_path)
     if image is not None:
         hist = compute_histogram(image, channel=0)
@@ -61,8 +62,6 @@ if __name__ == "__main__":
         hist_eq = compute_histogram(equalized, channel=0)
         plot_histogram(hist_eq, "Equalized Image Histogram")
 
-        # Show images
-        cv2.imshow("Original", image)
-        cv2.imshow("Equalized", equalized)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # Save images
+        cv2.imwrite("original_image.jpg", image)
+        cv2.imwrite("equalized_image.jpg", equalized)
