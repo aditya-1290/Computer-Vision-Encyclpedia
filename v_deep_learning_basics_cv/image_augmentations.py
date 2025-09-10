@@ -58,5 +58,5 @@ def apply_augmentations(image_path, num_augmentations=5):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../images/sample.jpg"  # Update path
+    image_path = "../images/17_dragon.jpg"  # Update path
     apply_augmentations(image_path)

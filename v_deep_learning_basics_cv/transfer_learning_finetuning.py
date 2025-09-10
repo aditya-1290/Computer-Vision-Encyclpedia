@@ -66,9 +66,11 @@ if __name__ == "__main__":
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
         dataset = CustomImageDataset(image_dir, transform=transform)
+        num_classes = len(set(dataset.labels))
+        print(f"Number of classes detected: {num_classes}")
         dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
 
-        model = load_pretrained_model(num_classes=10)
+        model = load_pretrained_model(num_classes=num_classes)
         fine_tune_model(model, dataloader)
         torch.save(model.state_dict(), "fine_tuned_model.pth")
     else:
