@@ -1,7 +1,7 @@
 """
 Point Clouds: 3D representation using point sets.
 
-Implementation uses Open3D for basic point cloud operations.
+Implementation uses PyntCloud for basic point cloud operations.
 
 Theory:
 - Point cloud: Set of 3D points (x,y,z) with optional attributes (color, normals).
@@ -10,27 +10,31 @@ Theory:
 Math: Point cloud P = {(x_i, y_i, z_i) | i=1 to N}
 
 Reference:
-- Open3D library documentation
+- PyntCloud library documentation
 """
 
 import numpy as np
-import open3d as o3d
+import pandas as pd
+import pyntcloud as pc
 
 def create_point_cloud(points, colors=None):
     """
     Create a point cloud from points and optional colors.
     """
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
+    data = {'x': points[:, 0], 'y': points[:, 1], 'z': points[:, 2]}
     if colors is not None:
-        pcd.colors = o3d.utility.Vector3dVector(colors)
+        data['red'] = colors[:, 0]
+        data['green'] = colors[:, 1]
+        data['blue'] = colors[:, 2]
+    df = pd.DataFrame(data)
+    pcd = pc.PyntCloud(df)
     return pcd
 
 def visualize_point_cloud(pcd):
     """
     Visualize the point cloud.
     """
-    o3d.visualization.draw_geometries([pcd])
+    pcd.plot()
 
 if __name__ == "__main__":
     # Create a simple point cloud
@@ -38,4 +42,4 @@ if __name__ == "__main__":
     colors = np.random.rand(1000, 3)
     pcd = create_point_cloud(points, colors)
     print(f"Point cloud has {len(pcd.points)} points")
-    # visualize_point_cloud(pcd)  # Uncomment to visualize
+    visualize_point_cloud(pcd)  # Uncomment to visualize
