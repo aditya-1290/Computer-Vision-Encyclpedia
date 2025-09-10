@@ -16,7 +16,7 @@ This repository is a comprehensive encyclopedia of computer vision techniques, f
 
 ## Prerequisites
 - Python 3.8+
-- Libraries: numpy, opencv-python, matplotlib, scikit-image, scikit-learn, torch, torchvision, tensorflow, Pillow, albumentations
+- Libraries: numpy, opencv-python, matplotlib, scikit-image, scikit-learn, torch, torchvision, Pillow, albumentations, pyntcloud
 
 ## How to Use
 - Explore each module folder for theory, math, and code implementations.
