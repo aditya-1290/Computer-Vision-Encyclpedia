@@ -109,6 +109,6 @@ def apply_feature_matching(image_path1, image_path2):
     plt.show()
 
 if __name__ == "__main__":
-    image_path1 = "../../images/ganpati_bappa.jpg"  # Update paths
-    image_path2 = "../../images/ganpati_bappa2.jpg"
+    image_path1 = "../images/ganpati_bappa.jpg"  # Update paths
+    image_path2 = "../images/dragon.webp"
     apply_feature_matching(image_path1, image_path2)

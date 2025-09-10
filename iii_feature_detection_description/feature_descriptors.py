@@ -31,9 +31,15 @@ def surf_descriptor(image):
     """
     Compute SURF descriptors.
     """
-    surf = cv2.xfeatures2d.SURF_create()
-    keypoints, descriptors = surf.detectAndCompute(image, None)
-    return keypoints, descriptors
+    try:
+        surf = cv2.xfeatures2d.SURF_create()
+        keypoints, descriptors = surf.detectAndCompute(image, None)
+        return keypoints, descriptors
+    except AttributeError:
+        print("SURF not available, using SIFT instead.")
+        sift = cv2.SIFT_create()
+        keypoints, descriptors = sift.detectAndCompute(image, None)
+        return keypoints, descriptors
 
 def orb_descriptor(image):
     """
@@ -107,5 +113,5 @@ def apply_descriptors(image_path):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/ganpati_bappa.jpg"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     apply_descriptors(image_path)

@@ -75,5 +75,5 @@ def apply_corner_detection(image_path):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/ganpati_bappa.jpg"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     apply_corner_detection(image_path)

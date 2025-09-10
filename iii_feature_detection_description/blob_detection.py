@@ -95,5 +95,5 @@ def apply_blob_detection(image_path):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/ganpati_bappa.jpg"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     apply_blob_detection(image_path)
