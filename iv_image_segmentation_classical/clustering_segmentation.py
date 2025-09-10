@@ -17,7 +17,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from skimage import segmentation
+from sklearn.cluster import MeanShift
 
 def kmeans_segmentation(image, K=3):
     """
@@ -44,8 +44,15 @@ def meanshift_segmentation(image, bandwidth=20):
     """
     # Convert to LAB for better color segmentation
     lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
-    segmented = segmentation.mean_shift(lab, bandwidth=bandwidth)
-    segmented = cv2.cvtColor(segmented.astype(np.uint8), cv2.COLOR_LAB2BGR)
+    flat_lab = lab.reshape((-1, 3))
+    ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
+    ms.fit(flat_lab)
+    labels = ms.labels_
+    cluster_centers = ms.cluster_centers_
+
+    segmented_flat = cluster_centers[labels].astype(np.uint8)
+    segmented = segmented_flat.reshape(lab.shape)
+    segmented = cv2.cvtColor(segmented, cv2.COLOR_LAB2BGR)
     return segmented
 
 def apply_clustering(image_path):
@@ -85,5 +92,5 @@ def apply_clustering(image_path):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/dragon.webp"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     apply_clustering(image_path)

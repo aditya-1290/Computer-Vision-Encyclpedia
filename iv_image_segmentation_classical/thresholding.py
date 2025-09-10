@@ -92,5 +92,5 @@ def apply_thresholding(image_path):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/dragon.webp"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     apply_thresholding(image_path)

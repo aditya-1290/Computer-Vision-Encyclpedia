@@ -45,6 +45,6 @@ def apply_grabcut(image_path, rect):
     plt.show()
 
 if __name__ == "__main__":
-    image_path = "../../images/dragon.webp"  # Update path
+    image_path = "../images/dragon.webp"  # Update path
     rect = (50, 50, 200, 200)  # Update ROI as needed
     apply_grabcut(image_path, rect)
