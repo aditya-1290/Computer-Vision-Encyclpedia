@@ -22,7 +22,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 latent_size = 100
 image_size = 256
 batch_size = 32
-num_epochs = 200
+num_epochs = 300000
 learning_rate = 0.0002
 beta1 = 0.5
 
@@ -184,9 +184,22 @@ def train_gan():
             errG.backward()
             optimizerG.step()
 
+            # Save intermediate generated images for monitoring
             if i % 50 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}] Batch [{i}/{len(dataloader)}] '
                       f'Loss D: {errD.item():.4f}, Loss G: {errG.item():.4f}')
+                netG.eval()
+                with torch.no_grad():
+                    noise = torch.randn(1, latent_size, 1, 1, device=device)
+                    fake_image = netG(noise)
+                    fake_image = fake_image.squeeze(0)
+                    fake_image = fake_image * 0.5 + 0.5  # Denormalize
+                    fake_image = fake_image.cpu().numpy().transpose(1, 2, 0)
+                    fake_image = (fake_image * 255).astype(np.uint8)
+                    fake_image = cv2.cvtColor(fake_image, cv2.COLOR_RGB2BGR)
+                    os.makedirs('intermediate_images', exist_ok=True)
+                    cv2.imwrite(f'intermediate_images/epoch{epoch+1}_batch{i}.jpg', fake_image)
+                netG.train()
 
     print("Training completed. Saving models...")
 
