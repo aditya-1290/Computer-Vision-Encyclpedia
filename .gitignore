@@ -9,12 +9,14 @@ data/
 models/
 dragon/ 
 TODO.md
-*.jpg
-*.png
-*.webp
-*.jpeg
-*.jfif
-*.avif
+intermediate_images/
+
+# *.jpg
+# *.png
+# *.webp
+# *.jpeg
+# *.jfif
+# *.avif
 *.pth
 *.pkl
-*.jpeg
+# *.jpeg
